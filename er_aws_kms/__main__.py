@@ -21,8 +21,7 @@ def create_tf_vars_json(
 ) -> None:
     """Create the terraform vars file"""
     path = Path(vars_file)
-    with path.open(mode="w", encoding="utf-8") as file:
-        file.write(app_interface_input.data.model_dump_json(exclude_none=True))
+    path.write_text(app_interface_input.data.model_dump_json(exclude_none=True))
 
 
 def create_backend_tf_file(
@@ -31,9 +30,8 @@ def create_backend_tf_file(
     """Create the backend.tf file"""
     provision_data = app_interface_input.provision.module_provision_data
     path = Path(backend_file)
-    with path.open(mode="w", encoding="utf-8") as file:
-        file.write(
-            f"""
+    path.write_text(
+        f"""
 terraform {{
   backend "s3" {{
     bucket = "{provision_data.tf_state_bucket}"
@@ -44,7 +42,7 @@ terraform {{
   }}
 }}
 """
-        )
+    )
 
 
 def main() -> None:

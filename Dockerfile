@@ -45,9 +45,7 @@ COPY --from=builder ${APP} ${APP}
 
 ENV \
     # Use the virtual environment
-    PATH="${APP}/.venv/bin:${PATH}" \
-    # cdktf python modules path
-    PYTHONPATH="$APP/.gen"
+    PATH="${APP}/.venv/bin:${PATH}"
 
 FROM prod AS test
 COPY --from=ghcr.io/astral-sh/uv:0.5.4@sha256:5436c72d52c9c0d011010ce68f4c399702b3b0764adcf282fe0e546f20ebaef6 /uv /bin/uv
