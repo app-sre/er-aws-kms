@@ -7,8 +7,8 @@ license = { text = "Apache 2.0" }
 readme = "README.md"
 requires-python = "~= 3.11.0"
 dependencies = [
-    "external-resources-io ~=0.3.2",
-    "pydantic ~=2.8.0",
+    "external-resources-io ~=0.4.0",
+    "pydantic ~=2.10.0",
 ]
 
 [project.urls]
@@ -25,7 +25,7 @@ dev = [
 ]
 
 [project.scripts]
-er-aws-kms = 'er_aws_kms.__main__:main'
+generate-tf-config = 'er_aws_kms.config:generate_tf_files'
 
 [build-system]
 requires = ["hatchling"]
