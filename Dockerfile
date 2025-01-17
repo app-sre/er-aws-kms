@@ -3,7 +3,7 @@ FROM quay.io/redhat-services-prod/app-sre-tenant/er-base-terraform-main/er-base-
 LABEL konflux.additional-tags="0.1.0"
 
 FROM base AS builder
-COPY --from=ghcr.io/astral-sh/uv:0.5.4@sha256:5436c72d52c9c0d011010ce68f4c399702b3b0764adcf282fe0e546f20ebaef6 /uv /bin/uv
+COPY --from=ghcr.io/astral-sh/uv:0.5.20@sha256:a8d9b557b6cd6ede1842b0e03cd7ac26870e2c6b4eea4e10dab67cbd3145f8d9 /uv /bin/uv
 
 ENV TF_PROVIDER_AWS_VERSION="5.82.2"
 ENV TF_PLUGIN_CACHE="${HOME}/.terraform.d/plugin-cache"
@@ -48,7 +48,7 @@ ENV \
     PATH="${APP}/.venv/bin:${PATH}"
 
 FROM prod AS test
-COPY --from=ghcr.io/astral-sh/uv:0.5.4@sha256:5436c72d52c9c0d011010ce68f4c399702b3b0764adcf282fe0e546f20ebaef6 /uv /bin/uv
+COPY --from=ghcr.io/astral-sh/uv:0.5.20@sha256:a8d9b557b6cd6ede1842b0e03cd7ac26870e2c6b4eea4e10dab67cbd3145f8d9 /uv /bin/uv
 
 # install test dependencies
 RUN uv sync --frozen
