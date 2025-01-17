@@ -1,2 +1,4 @@
-# er-aws-kms
-Erv2: KMS module
+# External Resources KMS Module
+
+
+External Resources module to provision and manage KMS keys in AWS with App-Interface.
