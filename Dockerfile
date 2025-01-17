@@ -1,5 +1,4 @@
-#FROM quay.io/redhat-services-prod/app-sre-tenant/er-base-terraform-main/er-base-terraform-main:tf-1.6.6-py-3.11-v0.1.0 AS base
-FROM docker.io/library/er-base-terraform:test AS base
+FROM quay.io/redhat-services-prod/app-sre-tenant/er-base-terraform-main/er-base-terraform-main:tf-1.6.6-v0.1.0-1 AS base
 # keep in sync with pyproject.toml
 LABEL konflux.additional-tags="0.1.0"
 
@@ -33,6 +32,7 @@ RUN uv sync --frozen --no-group dev --no-install-project --python /usr/bin/pytho
 # the source code
 COPY README.md ./
 COPY er_aws_kms ./er_aws_kms
+COPY module ./module
 
 # Sync the project
 RUN uv sync --frozen --no-group dev

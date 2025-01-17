@@ -1,5 +1,3 @@
-import os
-
 from external_resources_io.input import (
     create_backend_tf_file,
     create_tf_vars_json,
@@ -14,9 +12,7 @@ def get_ai_input() -> AppInterfaceInput:
     """Get the AppInterfaceInput from the input file."""
     return parse_model(
         AppInterfaceInput,
-        read_input_from_file(
-            file_path=os.environ.get("ER_INPUT_FILE", "/inputs/input.json"),
-        ),
+        read_input_from_file(),
     )
 
 
