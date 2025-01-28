@@ -75,14 +75,14 @@ dev = [
 
 [[package]]
 name = "external-resources-io"
-version = "0.4.0"
+version = "0.4.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pydantic" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/c4/be/c3bd3f6a01615d8bd536515b93519ad17e7afc1f425b46bd099de064fcff/external_resources_io-0.4.0.tar.gz", hash = "sha256:f169ba1060bfb29ddd67b66ded3d6348d8d5409784dffd77bc126dfb8a3a7392", size = 5085 }
+sdist = { url = "https://files.pythonhosted.org/packages/17/cf/e7ed057aa4cefc68c50c5ff9ba07aad23d6f77db165ab07390bfe0a28498/external_resources_io-0.4.1.tar.gz", hash = "sha256:3f4037f7842f5b22a01f8fb8fa0229174977cbf71d0e8a0c5bcda79fe8eaa200", size = 5121 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6d/04/31cd54bd7d9762f4281f40052109b8a53529e2c7041101147e98caf5404e/external_resources_io-0.4.0-py3-none-any.whl", hash = "sha256:111d96be034d76e51c55cf55041faf2918ca63aacaf23605eac7883e66302f70", size = 5384 },
+    { url = "https://files.pythonhosted.org/packages/4d/d3/2887eebbe25bea638e86d9e3f4bb16e9c2d28c1b1ddc36a12fe15d3863c0/external_resources_io-0.4.1-py3-none-any.whl", hash = "sha256:a736419b8a95b1d7ed6374d9b0212cfa29edafa939c16e5130b6fb179610c6de", size = 5424 },
 ]
 
 [[package]]
