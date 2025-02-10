@@ -1,19 +1,9 @@
-FROM quay.io/redhat-services-prod/app-sre-tenant/er-base-terraform-main/er-base-terraform-main:tf-1.6.6-v0.1.0-1 AS base
+FROM quay.io/redhat-services-prod/app-sre-tenant/er-base-terraform-main/er-base-terraform-main:tf-1.6.6-v0.2.0-1 AS base
 # keep in sync with pyproject.toml
-LABEL konflux.additional-tags="0.1.0"
+LABEL konflux.additional-tags="0.2.0"
 
 FROM base AS builder
 COPY --from=ghcr.io/astral-sh/uv:0.5.25@sha256:a73176b27709bff700a1e3af498981f31a83f27552116f21ae8371445f0be710 /uv /bin/uv
-
-ENV TF_PROVIDER_AWS_VERSION="5.82.2"
-ENV TF_PLUGIN_CACHE="${HOME}/.terraform.d/plugin-cache"
-ENV TF_PROVIDER_AWS_PATH="${TF_PLUGIN_CACHE}/registry.terraform.io/hashicorp/aws/${TF_PROVIDER_AWS_VERSION}/linux_amd64"
-
-RUN mkdir -p ${TF_PROVIDER_AWS_PATH} && \
-    curl -sfL https://releases.hashicorp.com/terraform-provider-aws/${TF_PROVIDER_AWS_VERSION}/terraform-provider-aws_${TF_PROVIDER_AWS_VERSION}_linux_amd64.zip \
-    -o /tmp/package-aws-${TF_PROVIDER_AWS_VERSION}.zip && \
-    unzip /tmp/package-aws-${TF_PROVIDER_AWS_VERSION}.zip -d ${TF_PROVIDER_AWS_PATH}/ && \
-    rm /tmp/package-aws-${TF_PROVIDER_AWS_VERSION}.zip
 
 # Python and UV related variables
 ENV \
@@ -32,16 +22,26 @@ RUN uv sync --frozen --no-group dev --no-install-project --python /usr/bin/pytho
 # the source code
 COPY README.md ./
 COPY er_aws_kms ./er_aws_kms
-COPY module ./module
 
 # Sync the project
 RUN uv sync --frozen --no-group dev
+
+# Copy the module directory and set 777 permissions.
+USER 0
+COPY --chmod=777 module ./module
+
+# Get the terraform providers
+RUN \
+    mkdir /tmp/tf_init/ \
+    && cp module/versions.tf /tmp/tf_init \
+    && terraform -chdir=/tmp/tf_init init
 
 FROM base AS prod
 # get cdktf providers
 COPY --from=builder ${TF_PLUGIN_CACHE_DIR} ${TF_PLUGIN_CACHE_DIR}
 # get our app with the dependencies
 COPY --from=builder ${APP} ${APP}
+
 
 ENV \
     # Use the virtual environment
