@@ -1,6 +1,6 @@
 [project]
 name = "er-aws-kms"
-version = "0.1.0"
+version = "0.2.0"
 description = "ERv2 module for managing KMS keys"
 authors = [{ name = "AppSRE", email = "sd-app-sre@redhat.com" }]
 license = { text = "Apache 2.0" }
@@ -20,8 +20,8 @@ documentation = "https://github.com/app-sre/er-aws-kms"
 dev = [
     "ruff ==0.9.3",
     "mypy ~=1.13",
-    "pytest ~=8.2.0",
-    "pytest-cov ~=5.0.0",
+    "pytest ~=8.3.4",
+    "pytest-cov ~=6.0.0",
 ]
 
 [project.scripts]
