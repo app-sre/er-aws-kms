@@ -28,7 +28,8 @@ RUN uv sync --frozen --no-group dev
 
 # Copy the module directory and set 777 permissions.
 USER 0
-COPY --chmod=777 module ./module
+COPY module ./module
+RUN chmod 777 ./module
 
 # Get the terraform providers
 RUN \
