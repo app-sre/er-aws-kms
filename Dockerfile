@@ -1,4 +1,4 @@
-FROM quay.io/redhat-services-prod/app-sre-tenant/er-base-terraform-main/er-base-terraform-main:tf-1.6.6-v0.2.0-1 AS base
+FROM quay.io/redhat-services-prod/app-sre-tenant/er-base-terraform-main/er-base-terraform-main:tf-1.6.6-v0.2.0-2 AS base
 # keep in sync with pyproject.toml
 LABEL konflux.additional-tags="0.2.0"
 
@@ -29,7 +29,6 @@ RUN uv sync --frozen --no-group dev
 # Copy the module directory and set 777 permissions.
 USER 0
 COPY module ./module
-RUN chmod 777 ./module
 
 # Get the terraform providers
 RUN \
