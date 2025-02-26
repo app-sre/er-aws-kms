@@ -1,4 +1,4 @@
-FROM quay.io/redhat-services-prod/app-sre-tenant/er-base-terraform-main/er-base-terraform-main:tf-1.6.6-v0.2.0-1@sha256:ad1b4c3786b8fd0fd3be75ce09454756314289ba91d65d84e7eaba148c96bae2 AS base
+FROM quay.io/redhat-services-prod/app-sre-tenant/er-base-terraform-main/er-base-terraform-main:tf-1.6.6-py-3.12-v0.3.2-1 AS base
 # keep in sync with pyproject.toml
 LABEL konflux.additional-tags="0.2.0"
 
@@ -11,7 +11,8 @@ ENV \
     UV_COMPILE_BYTECODE="true" \
     # disable uv cache. it doesn't make sense in a container
     UV_NO_CACHE=true \
-    UV_NO_PROGRESS=true
+    UV_NO_PROGRESS=true \
+    TERRAFORM_MODULE_SRC_DIR="${APP}/module"
 
 COPY pyproject.toml uv.lock ./
 # Test lock file is up to date
@@ -27,29 +28,12 @@ COPY er_aws_kms ./er_aws_kms
 RUN uv sync --frozen --no-group dev
 
 # Copy the module directory and set 777 permissions.
-USER 0
 COPY module ./module
 
 # Get the terraform providers
-RUN \
-    mkdir /tmp/tf_init/ \
-    && cp module/versions.tf /tmp/tf_init \
-    && terraform -chdir=/tmp/tf_init init
+RUN terraform-provider-sync
 
-FROM base AS prod
-# get cdktf providers
-COPY --from=builder ${TF_PLUGIN_CACHE_DIR} ${TF_PLUGIN_CACHE_DIR}
-# get our app with the dependencies
-COPY --from=builder ${APP} ${APP}
-
-
-ENV \
-    # Use the virtual environment
-    PATH="${APP}/.venv/bin:${PATH}"
-
-FROM prod AS test
-COPY --from=ghcr.io/astral-sh/uv:0.5.25@sha256:a73176b27709bff700a1e3af498981f31a83f27552116f21ae8371445f0be710 /uv /bin/uv
-
+FROM builder AS test
 # install test dependencies
 RUN uv sync --frozen
 
@@ -58,6 +42,14 @@ COPY tests ./tests
 
 RUN make test
 
-# Empty /tmp again because the test stage might have created files there, e.g. JSII_RUNTIME_PACKAGE_CACHE_ROOT
-# and we want to run this test image in the dev environment
-RUN rm -rf /tmp/*
+
+FROM builder AS prod
+# get cdktf providers
+COPY --from=builder ${TF_PLUGIN_CACHE_DIR} ${TF_PLUGIN_CACHE_DIR}
+# get our app with the dependencies
+COPY --from=builder ${APP} ${APP}
+
+
+ENV \
+    VIRTUAL_ENV="${APP}/.venv" \
+    PATH="${APP}/.venv/bin:${PATH}"
