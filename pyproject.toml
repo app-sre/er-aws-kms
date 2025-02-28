@@ -7,7 +7,7 @@ license = { text = "Apache 2.0" }
 readme = "README.md"
 requires-python = "~= 3.11.0"
 dependencies = [
-    "external-resources-io ~=0.4.0",
+    "external-resources-io ~=0.6.0",
     "pydantic ~=2.10.0",
 ]
 
@@ -18,7 +18,7 @@ documentation = "https://github.com/app-sre/er-aws-kms"
 
 [dependency-groups]
 dev = [
-    "ruff ==0.9.3",
+    "ruff ==0.9.9",
     "mypy ~=1.13",
     "pytest ~=8.3.4",
     "pytest-cov ~=6.0.0",
