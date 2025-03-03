@@ -20,10 +20,13 @@ terraform_tests:
 .PHONY: test
 test: code_tests terraform_tests
 
+.PHONY: build_test
+build_test:
+	$(CONTAINER_ENGINE) build --progress plain --target test -t er-aws-kms:test .
+
 .PHONY: build
 build:
-	$(CONTAINER_ENGINE) build --progress plain -t er-aws-kms:test .
-
+	$(CONTAINER_ENGINE) build --progress plain --target prod -t er-aws-kms:prod .
 .PHONY: dev
 dev:
 	# Prepare local development environment
