@@ -5,9 +5,9 @@ variable "identifier" {
 }
 
 variable "region" {
-    description = "The region where the KMS key will be created"
-    type        = string
-    default     = "us-east-1"
+  description = "The region where the KMS key will be created"
+  type        = string
+  default     = "us-east-1"
 }
 
 # 2.- Variables directly used by resources
@@ -99,7 +99,7 @@ variable "tags" {
 }
 
 variable "xls_key_id" {
-    description = "Identifies the external key that serves as key material for the KMS key in an external key store."
-    type        = string
-    default     = null
+  description = "Identifies the external key that serves as key material for the KMS key in an external key store."
+  type        = string
+  default     = null
 }

@@ -5,11 +5,6 @@ format:
 	uv run ruff check
 	uv run ruff format
 
-.PHONY: image_tests
-image_tests:
-	# test /tmp must be empty
-	[ -z "$(shell ls -A /tmp)" ]
-
 .PHONY: code_tests
 code_tests:
 	uv run ruff check --no-fix
@@ -17,13 +12,21 @@ code_tests:
 	uv run mypy
 	uv run pytest -vv --cov=er_aws_kms --cov-report=term-missing --cov-report xml
 
+.PHONY: terraform_tests
+terraform_tests:
+	terraform fmt -check -diff module/
+
+
 .PHONY: test
-test: image_tests code_tests
+test: code_tests terraform_tests
+
+.PHONY: build_test
+build_test:
+	$(CONTAINER_ENGINE) build --progress plain --target test -t er-aws-kms:test .
 
 .PHONY: build
 build:
-	$(CONTAINER_ENGINE) build --progress plain -t er-aws-kms:test .
-
+	$(CONTAINER_ENGINE) build --progress plain --target prod -t er-aws-kms:prod .
 .PHONY: dev
 dev:
 	# Prepare local development environment
