@@ -1,4 +1,3 @@
 .docker/
 module/backend.tf
 module/.terraform/
-module/.terraform*
