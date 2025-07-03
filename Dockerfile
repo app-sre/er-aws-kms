@@ -1,9 +1,9 @@
-FROM quay.io/redhat-services-prod/app-sre-tenant/er-base-terraform-main/er-base-terraform-main:0.3.8-2@sha256:e757c762403e112f832ac5c788f6e25f222c66b7633296a8ed4546ca943a18b7 AS base
+FROM quay.io/redhat-services-prod/app-sre-tenant/er-base-terraform-main/er-base-terraform-main:0.3.8-5@sha256:14173b2dcb47dbe7d65174373b2a6c7b545329fe378d220c5662598174d6b0da AS base
 # keep in sync with pyproject.toml
 LABEL konflux.additional-tags="0.2.2"
 
 FROM base AS builder
-COPY --from=ghcr.io/astral-sh/uv:0.7.12@sha256:4faec156e35a5f345d57804d8858c6ba1cf6352ce5f4bffc11b7fdebdef46a38 /uv /bin/uv
+COPY --from=ghcr.io/astral-sh/uv:0.7.19@sha256:2dcbc74e60ed6d842122ed538f5267c80e7cde4ff1b6e66a199b89972496f033 /uv /bin/uv
 
 # Python and UV related variables
 ENV \
