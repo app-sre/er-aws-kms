@@ -8,7 +8,7 @@ readme = "README.md"
 requires-python = "~= 3.12.0"
 dependencies = [
     "external-resources-io==0.6.1",
-    "pydantic==2.10.6",
+    "pydantic==2.11.7",
 ]
 
 [project.urls]
@@ -18,10 +18,10 @@ documentation = "https://github.com/app-sre/er-aws-kms"
 
 [dependency-groups]
 dev = [
-    "mypy==1.15.0",
-    "pytest-cov==6.0.0",
-    "pytest==8.3.5",
-    "ruff==0.11.0",
+    "mypy==1.17.1",
+    "pytest-cov==6.2.1",
+    "pytest==8.4.1",
+    "ruff==0.12.11",
 ]
 
 [project.scripts]
