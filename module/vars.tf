@@ -95,7 +95,7 @@ variable "multi_region" {
 variable "tags" {
   description = "Tags to assign to the KMS key"
   type        = map(string)
-  default     = null
+  default     = {}
 }
 
 variable "xls_key_id" {

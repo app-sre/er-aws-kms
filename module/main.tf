@@ -1,5 +1,9 @@
 provider "aws" {
   region = var.region
+
+  default_tags {
+    tags = var.tags
+  }
 }
 
 resource "aws_kms_key" "this" {
