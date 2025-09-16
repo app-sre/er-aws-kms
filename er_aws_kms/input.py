@@ -23,7 +23,7 @@ class Kms(KmsAppInterface):
     enable_key_rotation: bool | None = None
     rotation_period_in_days: int | None = None
     multi_region: bool | None = None
-    tags: dict[str, str] | None = None
+    tags: dict[str, str] = {}
     xls_key_id: str | None = None
 
     @field_validator("key_usage", mode="before")
