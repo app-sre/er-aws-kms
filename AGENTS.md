@@ -1,4 +1,4 @@
-# Agent.md
+# Agents.md
 
 This file provides guidance to AI agents when working with code in this
 repository.
@@ -136,12 +136,12 @@ qontract-cli --config=... external-resources get-input <provision_provider> \
 # Generate Terraform configuration
 generate-tf-config
 
-# Go to module dir which contains all the created terraform config
+# Go to module directory which contains all the created Terraform config
 cd ./module
 
-# Check the kms resource using terraform plan command
+# Check the KMS resource using terraform plan command
 terraform plan -out plan.out
 
-# Create kms resource using terraform apply command
+# Create KMS resource using terraform apply command
 terraform apply plan.out
 ```
