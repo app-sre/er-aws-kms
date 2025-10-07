@@ -19,7 +19,7 @@ documentation = "https://github.com/app-sre/er-aws-kms"
 [dependency-groups]
 dev = [
     "mypy==1.17.1",
-    "pytest-cov==6.2.1",
+    "pytest-cov==7.0.0",
     "pytest==8.4.1",
     "ruff==0.12.11",
 ]
