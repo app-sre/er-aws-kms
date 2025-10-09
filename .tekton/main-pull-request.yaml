@@ -29,7 +29,7 @@ spec:
   - name: path-context
     value: .
   - name: target-stage
-    value: test
+    value: prod
   pipelineRef:
     resolver: git
     params:
