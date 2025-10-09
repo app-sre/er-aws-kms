@@ -41,11 +41,9 @@ COPY Makefile ./
 COPY tests ./tests
 
 RUN make test
-RUN echo "true" > /tmp/is_tested
+
 
 FROM builder AS prod
-# Ensure we also trigger tests
-COPY --from=test /tmp/is_tested /tmp/is_tested
 # get cdktf providers
 COPY --from=builder ${TF_PLUGIN_CACHE_DIR} ${TF_PLUGIN_CACHE_DIR}
 # get our app with the dependencies
