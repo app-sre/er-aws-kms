@@ -5,7 +5,7 @@ description = "ERv2 module for managing KMS keys"
 authors = [{ name = "AppSRE", email = "sd-app-sre@redhat.com" }]
 license = { text = "Apache 2.0" }
 readme = "README.md"
-requires-python = "~= 3.12.0"
+requires-python = "~= 3.14.0"
 dependencies = ["external-resources-io==0.6.4", "pydantic==2.13.4"]
 
 [project.urls]
@@ -35,7 +35,7 @@ only-include = ["er_aws_kms"]
 # Ruff configuration
 [tool.ruff]
 line-length = 88
-target-version = 'py311'
+target-version = 'py314'
 src = ["er_aws_kms"]
 fix = true
 
@@ -75,12 +75,19 @@ ignore = [
 ]
 [tool.ruff.format]
 preview = true
+[tool.ruff.lint.flake8-type-checking]
+runtime-evaluated-base-classes = ["pydantic.BaseModel"]
+runtime-evaluated-decorators = [
+    "pydantic.validate_call",
+    "dataclasses.dataclass",
+]
 
 [tool.ruff.lint.isort]
 known-first-party = ["er_aws_kms"]
 
 # Mypy configuration
 [tool.mypy]
+python_version = "3.14"
 files = ["er_aws_kms", "tests"]
 enable_error_code = ["truthy-bool", "redundant-expr"]
 no_implicit_optional = true

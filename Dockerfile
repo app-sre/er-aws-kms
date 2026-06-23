@@ -1,4 +1,4 @@
-FROM quay.io/redhat-services-prod/app-sre-tenant/er-base-terraform-main/er-base-terraform-main:0.5.0-10@sha256:a89193c06fa60ab7f0b8f026fcbf8aaf2452ef1b0c494fb7f57e6c3e25dc1ed9 AS base
+FROM quay.io/redhat-services-prod/app-sre-tenant/er-base-terraform-main/er-base-terraform-main:0.6.0-6@sha256:d8b77d6253a9938040f5d7c7172f2d1b58773db2a1a9c618a1fb88d5e32ac850 AS base
 # keep in sync with pyproject.toml
 LABEL konflux.additional-tags="0.5.1"
 
@@ -18,7 +18,7 @@ COPY pyproject.toml uv.lock ./
 # Test lock file is up to date
 RUN uv lock --locked
 # Install dependencies
-RUN uv sync --frozen --no-group dev --no-install-project --python /usr/bin/python3
+RUN uv sync --frozen --no-group dev --no-install-project
 
 # the source code
 COPY README.md ./
