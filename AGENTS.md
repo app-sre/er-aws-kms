@@ -86,6 +86,7 @@ Configuration parameters (specified by input.json):
 
 ## Dependencies
 
+- **Python 3.14**
 - **external-resources-io**: Core ERv2 framework
 - **pydantic**: Data validation and serialization
 - **terraform**: Infrastructure as Code

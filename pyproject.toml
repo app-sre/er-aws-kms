@@ -6,7 +6,7 @@ authors = [{ name = "AppSRE", email = "sd-app-sre@redhat.com" }]
 license = { text = "Apache 2.0" }
 readme = "README.md"
 requires-python = "~= 3.14.0"
-dependencies = ["external-resources-io==0.6.4", "pydantic==2.13.4"]
+dependencies = ["external-resources-io==0.7.0", "pydantic==2.13.4"]
 
 [project.urls]
 homepage = "https://github.com/app-sre/er-aws-kms"
@@ -15,7 +15,7 @@ documentation = "https://github.com/app-sre/er-aws-kms"
 
 [dependency-groups]
 dev = [
-    "external-resources-io[cli]==0.6.4",
+    "external-resources-io[cli]==0.7.0",
     "mypy==2.1.0",
     "pytest-cov==7.1.0",
     "pytest==9.0.3",
@@ -88,6 +88,7 @@ known-first-party = ["er_aws_kms"]
 # Mypy configuration
 [tool.mypy]
 python_version = "3.14"
+plugins = "pydantic.mypy"
 files = ["er_aws_kms", "tests"]
 enable_error_code = ["truthy-bool", "redundant-expr"]
 no_implicit_optional = true
