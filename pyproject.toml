@@ -6,7 +6,7 @@ authors = [{ name = "AppSRE", email = "sd-app-sre@redhat.com" }]
 license = { text = "Apache 2.0" }
 readme = "README.md"
 requires-python = "~= 3.14.0"
-dependencies = ["external-resources-io==0.7.0", "pydantic==2.13.4"]
+dependencies = ["external-resources-io==0.7.0", "pydantic==2.13.5"]
 
 [project.urls]
 homepage = "https://github.com/app-sre/er-aws-kms"
